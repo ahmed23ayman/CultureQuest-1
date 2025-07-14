@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'wouter';
+import { Button } from '@/components/ui/button';
+import { Home } from 'lucide-react';
 
 interface CalculatorState {
   display: string;
@@ -232,6 +235,18 @@ export default function Calculator() {
       <div className="w-full max-w-sm mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
+          <div className="flex justify-center mb-4">
+            <Link href="/">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-purple-400 hover:text-purple-300"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                الرئيسية
+              </Button>
+            </Link>
+          </div>
           <h1 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             آلة حاسبة
           </h1>

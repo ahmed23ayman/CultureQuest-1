@@ -8,19 +8,35 @@ async function throwIfResNotOk(res: Response) {
 }
 
 export async function apiRequest(
-  method: string,
-  url: string,
-  data?: unknown | undefined,
-): Promise<Response> {
+  endpoint: string,
+  options: RequestInit = {},
+): Promise<any> {
+  const url = endpoint.startsWith("/") ? endpoint : `/${endpoint}`;
+  const token = localStorage.getItem('token');
+  
+  const headers: HeadersInit = {};
+  
+  // Only add Content-Type if body is provided and it's not FormData
+  if (options.body && !(options.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
+  
+  // Add authorization header if token exists
+  if (token) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+  
   const res = await fetch(url, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
+    ...options,
+    headers: {
+      ...headers,
+      ...options.headers,
+    },
     credentials: "include",
   });
 
   await throwIfResNotOk(res);
-  return res;
+  return res.json();
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";

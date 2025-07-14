@@ -1,8 +1,13 @@
-# Calculator App
+# Multi-App Platform
 
 ## Overview
 
-This is a full-stack calculator application built with React frontend and Express backend. The app features a modern, responsive calculator interface with comprehensive mathematical operations and error handling.
+This is a full-stack multi-application platform built with React frontend and Express backend. The platform includes a secure authentication system and currently hosts two applications:
+
+1. **Calculator App** - A modern, responsive calculator with comprehensive mathematical operations
+2. **Secure Vault** - A secure file storage system for images and videos with user authentication
+
+The platform features a unified authentication system, modern UI design, and secure file handling capabilities.
 
 ## User Preferences
 
@@ -40,10 +45,24 @@ Preferred communication style: Simple, everyday language.
 - **Middleware**: Request logging, JSON parsing, and error handling
 
 ### Database Schema
-- **Users Table**: Basic user authentication structure
+- **Users Table**: User authentication and profile management
   - `id`: Serial primary key
   - `username`: Unique text field
-  - `password`: Text field for hashed passwords
+  - `password`: Text field for hashed passwords (bcrypt)
+  - `createdAt`: Timestamp of account creation
+
+- **Vault Table**: Secure file storage system
+  - `id`: Serial primary key
+  - `userId`: Foreign key to users table
+  - `fileName`: Generated unique filename
+  - `originalName`: Original uploaded filename
+  - `mimeType`: File type for proper handling
+  - `fileSize`: Size in bytes
+  - `filePath`: Server path to file
+  - `description`: Optional user description
+  - `isPrivate`: Privacy setting (default: true)
+  - `createdAt`: Upload timestamp
+  - `updatedAt`: Last modification timestamp
 
 ## Data Flow
 
