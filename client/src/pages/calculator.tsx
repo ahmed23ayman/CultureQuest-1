@@ -99,6 +99,22 @@ export default function Calculator() {
     }));
   };
 
+  const handleSquareRoot = () => {
+    clearError();
+    setState(prev => {
+      const value = parseFloat(prev.display);
+      if (value < 0) {
+        showError('لا يمكن حساب الجذر التربيعي لعدد سالب');
+        return prev;
+      }
+      return {
+        ...prev,
+        display: Math.sqrt(value).toString(),
+        waitingForOperand: true,
+      };
+    });
+  };
+
   const calculate = (firstOperand: string, secondOperand: string, operation: string): string => {
     const first = parseFloat(firstOperand);
     const second = parseFloat(secondOperand);
@@ -195,6 +211,8 @@ export default function Calculator() {
         handleOperation('÷');
       } else if (e.key === 'Enter' || e.key === '=') {
         handleEquals();
+      } else if (e.key === 'r' || e.key === 'R') {
+        handleSquareRoot();
       }
     };
 
@@ -257,7 +275,7 @@ export default function Calculator() {
           {/* Button Grid */}
           <div className="p-6">
             <div className="grid grid-cols-4 gap-4">
-              {/* Row 1: Clear, Delete, Percentage, Division */}
+              {/* Row 1: Clear, Delete, Square Root, Division */}
               <button className="calculator-btn secondary-btn" onClick={handleClear}>
                 <span className="text-lg">C</span>
               </button>
@@ -266,8 +284,8 @@ export default function Calculator() {
                 <span className="text-lg">⌫</span>
               </button>
               
-              <button className="calculator-btn secondary-btn" onClick={handlePercentage}>
-                <span className="text-lg">%</span>
+              <button className="calculator-btn secondary-btn" onClick={handleSquareRoot}>
+                <span className="text-lg">√</span>
               </button>
               
               <button className="calculator-btn operator-btn" onClick={() => handleOperation('÷')}>
@@ -325,13 +343,17 @@ export default function Calculator() {
                 <span className="text-xl">+</span>
               </button>
 
-              {/* Row 5: 0 (spans 2 columns), Decimal, Equals */}
-              <button className="calculator-btn number-btn col-span-2" onClick={() => handleNumber('0')}>
+              {/* Row 5: 0, Decimal, Percentage, Equals */}
+              <button className="calculator-btn number-btn" onClick={() => handleNumber('0')}>
                 <span className="text-xl">0</span>
               </button>
               
               <button className="calculator-btn number-btn" onClick={handleDecimal}>
                 <span className="text-xl">.</span>
+              </button>
+              
+              <button className="calculator-btn secondary-btn" onClick={handlePercentage}>
+                <span className="text-lg">%</span>
               </button>
               
               <button className="calculator-btn equals-btn" onClick={handleEquals}>
