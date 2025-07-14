@@ -379,9 +379,12 @@ export default function Calculator() {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-8 text-xs">
+        <div className="text-center mt-8 text-xs space-y-3">
+          <p className="px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/5 font-serif italic" style={{ color: 'var(--calculator-text-muted)' }}>
+            Developed by Ahmed Ayman
+          </p>
           <p className="px-4 py-2 rounded-full bg-gradient-to-r from-gray-500/10 to-gray-600/10 backdrop-blur-sm border border-white/5" style={{ color: 'var(--calculator-text-muted)' }}>
-            © 2024 أحمد أيمن - جميع الحقوق محفوظة
+            © 2024 جميع الحقوق محفوظة
           </p>
         </div>
       </div>

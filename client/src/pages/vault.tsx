@@ -340,6 +340,13 @@ export default function VaultPage() {
             </div>
           </DialogContent>
         </Dialog>
+        
+        {/* Footer */}
+        <div className="text-center mt-8 pt-6 border-t border-white/10">
+          <p className="text-xs px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-white/5 font-serif italic inline-block" style={{ color: 'var(--calculator-text-muted)' }}>
+            Developed by Ahmed Ayman
+          </p>
+        </div>
       </div>
     </div>
   );
