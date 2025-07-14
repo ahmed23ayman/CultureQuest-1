@@ -10,7 +10,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
-import { Upload, File, Image, Video, Trash2, Download, Eye, LogOut } from 'lucide-react';
+import { Upload, File, Image, Video, Trash2, Download, Eye, LogOut, Home } from 'lucide-react';
+import { Link } from 'wouter';
 
 interface VaultFile {
   id: number;
@@ -158,7 +159,7 @@ export default function VaultPage() {
               مرحباً {user?.username}
             </p>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-3">
             <Button
               onClick={() => fileInputRef.current?.click()}
               className="operator-btn"
@@ -167,6 +168,16 @@ export default function VaultPage() {
               <Upload className="h-4 w-4 mr-2" />
               رفع ملف
             </Button>
+            <Link href="/">
+              <Button
+                variant="outline"
+                className="border-white/10"
+                style={{ color: 'var(--calculator-text)' }}
+              >
+                <Home className="h-4 w-4 mr-2" />
+                الرئيسية
+              </Button>
+            </Link>
             <Button
               onClick={logout}
               variant="outline"
