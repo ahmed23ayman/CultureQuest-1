@@ -24,19 +24,23 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Calculator specific colors */
-  --calculator-bg: hsl(222, 47%, 11%);
-  --calculator-surface: hsl(214, 32%, 20%);
-  --calculator-display: hsl(215, 25%, 27%);
-  --calculator-button: hsl(215, 16%, 47%);
-  --calculator-button-hover: hsl(215, 20%, 65%);
-  --calculator-operator: hsl(38, 92%, 50%);
-  --calculator-operator-hover: hsl(43, 96%, 56%);
-  --calculator-equals: hsl(207, 90%, 54%);
-  --calculator-equals-hover: hsl(207, 90%, 61%);
+  /* Calculator specific colors - Modern gradient theme */
+  --calculator-bg: linear-gradient(135deg, hsl(220, 55%, 8%), hsl(235, 65%, 12%));
+  --calculator-surface: hsl(220, 45%, 15%);
+  --calculator-display: hsl(220, 40%, 18%);
+  --calculator-button: hsl(220, 25%, 25%);
+  --calculator-button-hover: hsl(220, 30%, 35%);
+  --calculator-operator: linear-gradient(135deg, hsl(280, 85%, 55%), hsl(320, 90%, 60%));
+  --calculator-operator-hover: linear-gradient(135deg, hsl(280, 90%, 65%), hsl(320, 95%, 70%));
+  --calculator-equals: linear-gradient(135deg, hsl(200, 100%, 45%), hsl(240, 100%, 60%));
+  --calculator-equals-hover: linear-gradient(135deg, hsl(200, 100%, 55%), hsl(240, 100%, 70%));
+  --calculator-clear: linear-gradient(135deg, hsl(15, 85%, 55%), hsl(35, 90%, 60%));
+  --calculator-clear-hover: linear-gradient(135deg, hsl(15, 90%, 65%), hsl(35, 95%, 70%));
   --calculator-error: hsl(0, 84%, 60%);
   --calculator-text: hsl(210, 40%, 98%);
   --calculator-text-muted: hsl(215, 20%, 65%);
+  --calculator-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  --calculator-shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.5);
 }
 
 .dark {
@@ -69,75 +73,108 @@
 
   body {
     @apply font-sans antialiased;
-    background-color: var(--calculator-bg);
+    background: var(--calculator-bg);
     color: var(--calculator-text);
     font-family: 'Inter', sans-serif;
+    min-height: 100vh;
   }
 }
 
 @layer components {
   .calculator-btn {
-    @apply h-16 rounded-xl transition-all duration-150 ease-in-out;
+    @apply h-16 rounded-2xl transition-all duration-200 ease-in-out;
     @apply flex items-center justify-center;
     @apply select-none cursor-pointer;
     @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
     @apply active:scale-95;
-    @apply font-semibold;
+    @apply font-semibold text-lg;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .calculator-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .calculator-btn:hover::before {
+    left: 100%;
   }
 
   .calculator-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+    box-shadow: var(--calculator-shadow);
   }
 
   .calculator-btn:active {
     transform: translateY(0) scale(0.95);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   }
 
   .number-btn {
-    background-color: var(--calculator-button);
+    background: var(--calculator-button);
     color: var(--calculator-text);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
 
   .number-btn:hover {
-    background-color: var(--calculator-button-hover);
+    background: var(--calculator-button-hover);
+    box-shadow: var(--calculator-shadow-hover);
   }
 
   .operator-btn {
-    background-color: var(--calculator-operator);
-    color: hsl(222, 47%, 11%);
+    background: var(--calculator-operator);
+    color: white;
+    box-shadow: 0 8px 20px rgba(200, 50, 200, 0.3);
   }
 
   .operator-btn:hover {
-    background-color: var(--calculator-operator-hover);
+    background: var(--calculator-operator-hover);
+    box-shadow: 0 12px 30px rgba(200, 50, 200, 0.4);
   }
 
   .secondary-btn {
-    background-color: var(--calculator-button);
-    color: var(--calculator-text);
+    background: var(--calculator-clear);
+    color: white;
+    box-shadow: 0 8px 20px rgba(250, 100, 50, 0.3);
   }
 
   .secondary-btn:hover {
-    background-color: var(--calculator-button-hover);
+    background: var(--calculator-clear-hover);
+    box-shadow: 0 12px 30px rgba(250, 100, 50, 0.4);
   }
 
   .equals-btn {
-    background-color: var(--calculator-equals);
-    color: var(--calculator-text);
+    background: var(--calculator-equals);
+    color: white;
+    box-shadow: 0 8px 20px rgba(50, 150, 250, 0.3);
   }
 
   .equals-btn:hover {
-    background-color: var(--calculator-equals-hover);
+    background: var(--calculator-equals-hover);
+    box-shadow: 0 12px 30px rgba(50, 150, 250, 0.4);
   }
 
   .calculator-display {
-    background-color: var(--calculator-display);
+    background: var(--calculator-display);
     color: var(--calculator-text);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .calculator-surface {
-    background-color: var(--calculator-surface);
+    background: var(--calculator-surface);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
   }
 
   .shake {

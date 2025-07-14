@@ -210,22 +210,22 @@ export default function Calculator() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4" style={{ backgroundColor: 'var(--calculator-bg)' }}>
+    <div className="min-h-screen flex items-center justify-center p-4" style={{ background: 'var(--calculator-bg)' }}>
       <div className="w-full max-w-sm mx-auto">
         {/* Header */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold mb-2" style={{ color: 'var(--calculator-text)' }}>
+        <div className="text-center mb-8">
+          <h1 className="text-3xl font-bold mb-3 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
             آلة حاسبة
           </h1>
-          <p className="text-sm" style={{ color: 'var(--calculator-text-muted)' }}>
+          <p className="text-sm px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 backdrop-blur-sm border border-white/10" style={{ color: 'var(--calculator-text-muted)' }}>
             أحمد أيمن
           </p>
         </div>
 
         {/* Calculator Container */}
-        <div className="calculator-surface rounded-2xl shadow-2xl overflow-hidden">
+        <div className="calculator-surface rounded-3xl shadow-2xl overflow-hidden" style={{ boxShadow: 'var(--calculator-shadow)' }}>
           {/* Display Screen */}
-          <div className="calculator-display p-6 border-b border-slate-700">
+          <div className="calculator-display p-8 border-b border-white/10">
             {/* Current Expression */}
             <div className="text-right mb-2 h-6">
               <span className="text-sm font-mono" style={{ color: 'var(--calculator-text-muted)' }}>
@@ -237,10 +237,10 @@ export default function Calculator() {
             <div className="text-right">
               <input 
                 type="text" 
-                className="w-full bg-transparent text-4xl font-mono text-right border-none outline-none cursor-default"
+                className="w-full bg-transparent text-5xl font-mono text-right border-none outline-none cursor-default font-bold tracking-wide"
                 value={state.display}
                 readOnly
-                style={{ color: 'var(--calculator-text)' }}
+                style={{ color: 'var(--calculator-text)', textShadow: '0 0 20px rgba(255,255,255,0.3)' }}
               />
             </div>
 
@@ -255,8 +255,8 @@ export default function Calculator() {
           </div>
 
           {/* Button Grid */}
-          <div className="p-4">
-            <div className="grid grid-cols-4 gap-3">
+          <div className="p-6">
+            <div className="grid grid-cols-4 gap-4">
               {/* Row 1: Clear, Delete, Percentage, Division */}
               <button className="calculator-btn secondary-btn" onClick={handleClear}>
                 <span className="text-lg">C</span>
@@ -342,8 +342,10 @@ export default function Calculator() {
         </div>
 
         {/* Footer */}
-        <div className="text-center mt-6 text-xs" style={{ color: 'var(--calculator-text-muted)' }}>
-          <p>© 2024 أحمد أيمن - جميع الحقوق محفوظة</p>
+        <div className="text-center mt-8 text-xs">
+          <p className="px-4 py-2 rounded-full bg-gradient-to-r from-gray-500/10 to-gray-600/10 backdrop-blur-sm border border-white/5" style={{ color: 'var(--calculator-text-muted)' }}>
+            © 2024 أحمد أيمن - جميع الحقوق محفوظة
+          </p>
         </div>
       </div>
     </div>
