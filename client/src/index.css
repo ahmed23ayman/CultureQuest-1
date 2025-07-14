@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(20, 14.3%, 4.1%);
+  --muted: hsl(60, 4.8%, 95.9%);
+  --muted-foreground: hsl(25, 5.3%, 44.7%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --border: hsl(20, 5.9%, 90%);
+  --input: hsl(20, 5.9%, 90%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(60, 4.8%, 95.9%);
+  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --accent: hsl(60, 4.8%, 95.9%);
+  --accent-foreground: hsl(24, 9.8%, 10%);
+  --destructive: hsl(0, 84.2%, 60.2%);
+  --destructive-foreground: hsl(60, 9.1%, 97.8%);
+  --ring: hsl(20, 14.3%, 4.1%);
+  --radius: 0.5rem;
+  
+  /* Calculator specific colors */
+  --calculator-bg: hsl(222, 47%, 11%);
+  --calculator-surface: hsl(214, 32%, 20%);
+  --calculator-display: hsl(215, 25%, 27%);
+  --calculator-button: hsl(215, 16%, 47%);
+  --calculator-button-hover: hsl(215, 20%, 65%);
+  --calculator-operator: hsl(38, 92%, 50%);
+  --calculator-operator-hover: hsl(43, 96%, 56%);
+  --calculator-equals: hsl(207, 90%, 54%);
+  --calculator-equals-hover: hsl(207, 90%, 61%);
+  --calculator-error: hsl(0, 84%, 60%);
+  --calculator-text: hsl(210, 40%, 98%);
+  --calculator-text-muted: hsl(215, 20%, 65%);
+}
+
+.dark {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(211, 100%, 99%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: var(--calculator-bg);
+    color: var(--calculator-text);
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .calculator-btn {
+    @apply h-16 rounded-xl transition-all duration-150 ease-in-out;
+    @apply flex items-center justify-center;
+    @apply select-none cursor-pointer;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-50;
+    @apply active:scale-95;
+    @apply font-semibold;
+  }
+
+  .calculator-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .calculator-btn:active {
+    transform: translateY(0) scale(0.95);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .number-btn {
+    background-color: var(--calculator-button);
+    color: var(--calculator-text);
+  }
+
+  .number-btn:hover {
+    background-color: var(--calculator-button-hover);
+  }
+
+  .operator-btn {
+    background-color: var(--calculator-operator);
+    color: hsl(222, 47%, 11%);
+  }
+
+  .operator-btn:hover {
+    background-color: var(--calculator-operator-hover);
+  }
+
+  .secondary-btn {
+    background-color: var(--calculator-button);
+    color: var(--calculator-text);
+  }
+
+  .secondary-btn:hover {
+    background-color: var(--calculator-button-hover);
+  }
+
+  .equals-btn {
+    background-color: var(--calculator-equals);
+    color: var(--calculator-text);
+  }
+
+  .equals-btn:hover {
+    background-color: var(--calculator-equals-hover);
+  }
+
+  .calculator-display {
+    background-color: var(--calculator-display);
+    color: var(--calculator-text);
+  }
+
+  .calculator-surface {
+    background-color: var(--calculator-surface);
+  }
+
+  .shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  .pulse-accent {
+    animation: pulse-accent 1s infinite;
+  }
+
+  @keyframes pulse-accent {
+    0%, 100% { background-color: var(--calculator-operator); }
+    50% { background-color: var(--calculator-operator-hover); }
+  }
+}
+
+@media (min-width: 640px) {
+  .calculator-btn {
+    @apply h-20;
+  }
+}
